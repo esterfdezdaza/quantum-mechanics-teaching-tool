@@ -1,0 +1,22 @@
+{
+  "name": "quantum-mechanics-teaching-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esterfdezdaza/quantum-mechanics-teaching-tool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esterfdezdaza/quantum-mechanics-teaching-tool/issues"
+  },
+  "homepage": "https://github.com/esterfdezdaza/quantum-mechanics-teaching-tool#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.27"
+  }
+}
