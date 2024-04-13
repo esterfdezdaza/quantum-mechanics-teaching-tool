@@ -55,47 +55,30 @@ test('Input boxes V3', async ({ page }) => {
   
 });
 
-async function setSliderValue(page, sliderXPath, valueAsPercent) {
-  // Find the slider element using the provided XPath and obtain its bounding box
-  const slider = await page.locator(sliderXPath).first()
-  console.log("slider: " + slider)
-  const s = await page.getByRole('slider', { id: "slider"}).first()
-  console.log("other method: " + s)
-  const sliderBound = await page.locator(sliderXPath).boundingBox();
-
-  // Use page.evaluate to obtain the current slider value from the HTML using the same XPath
-  const currentSliderValue = await page.evaluate(`document.evaluate("${sliderXPath}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value`);
-
-  // Calculate the target X and Y coordinates for the mouse cursor based on the current slider value
-  const targetX = sliderBound.x + (sliderBound.width * currentSliderValue / 100);
-  const targetY = sliderBound.y + sliderBound.height / 2;
-
-  // Move the mouse cursor to the calculated position
-  await page.mouse.move(targetX, targetY);
-
-  // Simulate a mouse click by pressing the mouse button
-  await page.mouse.down();
-
-  // Move the mouse cursor to the desired position by the provided valueAsPercent
-  await page.mouse.move(
-      sliderBound.x + (sliderBound.width * valueAsPercent) / 100,
-      sliderBound.y + sliderBound.height / 2,
-  );
-
-  // Release the mouse button to complete the interaction
-  await page.mouse.up();
-}
-
-test('Input boxes V2', async ({ page }) => {
+test('Input sliders for V2', async ({ page }) => {
   await page.goto('https://esterfdezdaza.github.io/quantum-mechanics-teaching-tool/visualisations/compton-effect-v2.html');
+  //await page.goto('http://127.0.0.1:5502/visualisations/compton-effect-v2.html')
 
-  //const slider = await page.locator("//*[@id = 'slider']").boundingBox()
-  //console.log("slider: " + slider)
-  const s = await page.getByRole("slider").first().innerHTML()
-  console.log("other method: " + s)
-
-  //await setSliderValue(page, "//*[@id = 'slider']", 3);
-
+  await moveSlider(page, 0, 0.5)
+  await moveSlider(page, 1, 0.4)
+  await moveSlider(page, 2, 0.9)
+  await moveSlider(page, 3, 0.7)
   
 });
 
+/**
+ * Move the nth slider the set amount (0-1) on page.
+ */
+async function moveSlider(page, nth, amount) {
+  const sliderTrack = page.frameLocator('#visualisation').first().getByRole("slider").nth(nth)
+
+  const sliderOffsetWidth = await sliderTrack.evaluate(el => {
+      return el.getBoundingClientRect().width
+  })
+
+  // Using the hover method to place the mouse cursor then moving it to the right
+  await sliderTrack.hover({ force: true, position: { x: 0, y: 0 } })
+  await page.mouse.down()
+  await sliderTrack.hover({ force: true, position: { x: sliderOffsetWidth * amount, y: 0 } })
+  await page.mouse.up()
+}
