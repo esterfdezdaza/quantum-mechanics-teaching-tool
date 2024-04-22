@@ -1,3 +1,8 @@
+/**
+ * The tailwind configuration is used along the project for the styling of the components.
+ * https://tailwindui.com/components
+ */
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["**/*.{html,js}"],
