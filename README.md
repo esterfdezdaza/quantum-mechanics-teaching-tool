@@ -4,22 +4,22 @@ This repository contains the deployment and wrap-up of my Computer Science and P
 Project URL:
 https://esterfdezdaza.github.io/quantum-mechanics-teaching-tool/
 
-Overview
+Overview:
 This project is a web application designed as a teaching tool for quantum mechanics concepts. It integrates the core logic for the application and connects to various repositories that contain visualizations used throughout the tool.
 
-Contents
+Contents:
 Web Application Logic: The core codebase responsible for running the interactive web app.
 
 External Visualisations: Links and integrations to repositories that provide visual components and simulations for quantum mechanics topics.
 
-Features
+Features:
 Interactive quantum mechanics visualisations.
 
 Modular architecture allowing easy integration with external visualisation repositories.
 
 User-friendly interface aimed at facilitating learning complex physics concepts.
 
-Deployment
+Deployment:
 The live version of this project is hosted on GitHub Pages and can be accessed at the URL above.
 
 Contact
